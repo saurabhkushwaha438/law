@@ -1,7 +1,7 @@
 // blogModel.js
 import mongoose from 'mongoose';
 
-const { Schema } = mongoose;
+const { Schema ,model} = mongoose;
 
 const blogSchema = new Schema({
     title: {
@@ -10,11 +10,6 @@ const blogSchema = new Schema({
     },
     content: {
         type: String,
-        required: true,
-    },
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
         required: true,
     },
     images: [
