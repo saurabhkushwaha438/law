@@ -1,13 +1,23 @@
 import nodemailer from 'nodemailer';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+import dotenv from 'dotenv'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, '../.env') });
+
 
 const transporter = nodemailer.createTransport({
     
-    host: "smtp.ethereal.email",
+    host: `${process.env.HOST_CON}`,
     port: 587,
     secure: false,
     auth: {
-      user: 'destinee.rogahn7@ethereal.email',
-        pass: '8vmdbxXaW2TA8Jan1D'
+      user: `${process.env.USER}`,
+        pass: `${process.env.PASS}`
     },
   });
 

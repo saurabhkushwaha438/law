@@ -12,11 +12,10 @@ const blogSchema = new Schema({
         type: String,
         required: true,
     },
-    images: [
-        {
+    images:  {
             type: String,
+            required:true
         },
-    ],
     createdAt: {
         type: Date,
         default: Date.now,

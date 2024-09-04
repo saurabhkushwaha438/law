@@ -3,9 +3,9 @@ import multer from 'multer';
 import { getBlogs, createBlog } from '../controller/blogController.js';
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/blogs/' });
+const upload = multer({ dest: 'images' });
 
 router.get('/', getBlogs);
-router.post('/', upload.array('images', 5), createBlog);
+router.post('/', upload.single('images'), createBlog);
 
 export default router;
