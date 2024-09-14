@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function HeroSection() {
   return (
@@ -27,9 +28,9 @@ function HeroSection() {
                     </span>
                   </p>
                   <div className="d-grid gap-2 d-sm-flex justify-content-sm-center justify-content-md-start">
-                    <a href="#!" className="btn bsb-btn-2xl btn-light">
+                    <Link to="/blog" className="btn bsb-btn-2xl btn-light">
                       learn more
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

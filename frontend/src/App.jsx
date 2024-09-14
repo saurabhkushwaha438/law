@@ -4,18 +4,32 @@ import ContactForm from './Components/ContactForm.jsx'
 import Navbar from './Components/Navbar.jsx'
 import Footer from './Components/Footer.jsx'
 import Aboutus from './Components/Aboutus.jsx'
-import BlogSection from './Components/Blogs.jsx'
+import BlogSection from './Components/BlogSection.jsx'
+import { Route,Routes } from 'react-router-dom'
+import CreateBlogForm from './Components/BlogInput.jsx'
+
 function App() {
   
   return (
-   <>
-   <Navbar></Navbar>
-   <Hero></Hero>
-   <BlogSection></BlogSection>
-   <Aboutus></Aboutus>
-   <ContactForm></ContactForm>
-   <Footer></Footer>
-   </>
+    <>
+      <Navbar />
+      <Routes>
+        <Route 
+          path='/' 
+          element={
+            <>
+              <Hero />
+              <Aboutus />
+              <ContactForm />
+              <Footer />
+            </>
+          } 
+        />
+        <Route path='/contact' element={<ContactForm />} />
+        <Route path='/blog' element={<BlogSection />} />
+        <Route path='/createblog' element={<CreateBlogForm />} />
+      </Routes>
+    </>
   )
 }
 

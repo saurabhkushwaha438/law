@@ -16,29 +16,17 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const port = process.env.PORT;
-app.use("/images", express.static(path.join(__dirname, "/images")));
 
-// Multer setup
-const storage = multer.diskStorage({
-  destination: (req, file, callb) => {
-    callb(null, "images");
-  },
-  filename: (req, file, callb) => {
-    const extension = path.extname(file.originalname);
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    const filename = `${uniqueSuffix}${extension}`;
-    callb(null, filename);
-  }
-});
 
-const upload = multer({ storage: storage });
-
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173'  // Frontend URL
+}));
 connectDB();
 
 
