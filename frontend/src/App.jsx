@@ -7,6 +7,7 @@ import Aboutus from './Components/Aboutus.jsx'
 import BlogSection from './Components/BlogSection.jsx'
 import { Route,Routes } from 'react-router-dom'
 import CreateBlogForm from './Components/BlogInput.jsx'
+import Articles from './Components/Articles.jsx'
 
 function App() {
   
@@ -28,6 +29,7 @@ function App() {
         <Route path='/contact' element={<ContactForm />} />
         <Route path='/blog' element={<BlogSection />} />
         <Route path='/createblog' element={<CreateBlogForm />} />
+        <Route path='/articles' element={<Articles/>} />
       </Routes>
     </>
   )

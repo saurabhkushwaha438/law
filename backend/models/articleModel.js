@@ -8,10 +8,6 @@ const articleSchema = new Schema({
         type: String,
         required: true,
     },
-    description: {
-        type: String,
-        default: '',
-    },
     pdfUrl: {
         type: String,
         required: true,

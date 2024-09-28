@@ -18,6 +18,7 @@ const BlogSection = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('/api/blogs');
+        
         setBlogs(response.data);
       } catch (error) {
         console.error("Error fetching blogs:", error);
@@ -99,6 +100,8 @@ const BlogSection = () => {
                   <p className="card-text flex-grow-1">
                     {blog.content.length > 100 ? `${blog.content.substring(0, 100)}...` : blog.content}
                   </p>
+                  <small className="text-muted">Published on {new Date(blog.createdAt).toLocaleDateString()}</small>
+
                   <button className="btn btn-secondary mt-auto" onClick={() => handleShow(blog)}>
                     Read more
                   </button>

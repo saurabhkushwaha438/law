@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 import connectDB from "./config/dbconfig.js";
 import blogRoutes from './routes/blogRoutes.js';
 import contactRoutes from './routes/contactRoutes.js'
+import articleRoutes from './routes/articleRoutes.js'
 import bodyParser from 'body-parser';
-import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -19,21 +19,23 @@ const port = process.env.PORT;
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/pdfs', express.static(path.join(__dirname, 'pdfs')));
 
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
-  origin: 'http://localhost:5173'  // Frontend URL
+  origin: 'http://localhost:5173'  
 }));
 connectDB();
 
 
-// Use upload middleware in your routes
 app.use('/api/blogs', blogRoutes);
-
+app.use('/api/articles',articleRoutes)
 app.use('/api/contact',contactRoutes);
+
+
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send('An error occurred');

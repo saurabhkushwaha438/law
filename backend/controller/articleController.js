@@ -2,17 +2,16 @@ import Article from '../models/articleModel.js';
 
 export const createArticle = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title } = req.body;
         
         if (!req.file) {
             return res.status(400).json({ error: "No PDF file uploaded" });
         }
 
-        const pdfUrl = `${req.protocol}://${req.get('host')}/uploads/articles/${req.file.filename}`;
+        const pdfUrl =req.file.filename
 
         const newArticle = new Article({
             title,
-            description,
             pdfUrl
         });
 
