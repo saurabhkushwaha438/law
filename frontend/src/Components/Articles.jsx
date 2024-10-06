@@ -8,7 +8,10 @@ function Articles() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get('/api/articles');
+        const response = await axios.get('/api/articles',{
+          referrerPolicy: 'no-referrer',
+          mode: 'no-cors',
+        });
         setArticles(response.data);
       } catch (error) {
         console.error("Error fetching articles:", error);
@@ -35,9 +38,10 @@ function Articles() {
             <li key={article.id} className="list-group-item d-flex justify-content-between align-items-center">
               <div>
                 <h5 className="mb-1">{article.title}</h5>
+                <small className="text-muted">Published on {new Date(article.createdAt).toLocaleDateString()}</small>
               </div>
               <a 
-                href={`http://localhost:3000/pdfs/${article.pdfUrl}`} 
+                href={` http://localhost:3000/pdfs/${article.pdfUrl}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"

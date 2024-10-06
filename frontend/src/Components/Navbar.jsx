@@ -17,7 +17,7 @@ const Navbar = () => {
             height="50"
             className="d-inline-block align-top"
           />
-          <span className="ms-2 fw-bold">JuristJournal</span>
+          <span className="ms-2 fw-bold">Legal Eye Partners</span>
         </Link>
 
         <button

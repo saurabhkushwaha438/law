@@ -14,8 +14,9 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
 const app = express();
-const port = process.env.PORT;
+const port = 3000;
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -26,7 +27,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
-  origin: 'http://localhost:5173'  
+   origin: 'http://localhost:5173/',
 }));
 connectDB();
 
@@ -35,10 +36,17 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/articles',articleRoutes)
 app.use('/api/contact',contactRoutes);
 
+app.use(express.static(path.join(__dirname,'dist')));
+
+
 
 app.use((err, req, res, next) => {
   console.error(err);
   res.status(500).send('An error occurred');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.listen(port, () => {

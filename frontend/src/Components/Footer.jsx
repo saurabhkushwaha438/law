@@ -96,7 +96,7 @@ const Footer = () => {
                         />
                         <span
           style={{ marginLeft: '10px',fontWeight:'bold', verticalAlign: 'middle' ,color:'black' }}
-          >JuristJournal</span>
+          >Legal Eye Partners</span>
                       </a>
                     </div>
                   </div>

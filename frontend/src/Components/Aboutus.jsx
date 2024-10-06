@@ -8,7 +8,7 @@ const AboutSection = () => {
           <div className="col-12 col-md-10 col-lg-8">
             <h3 className="fs-5 mb-2 text-secondary text-uppercase">About Us</h3>
             <h2 className="display-5 mb-4">
-            JuristJournal has been dedicated to publishing high-quality text that inspire readers of all ages. We have a team of experienced editors, designers, and marketing professionals who work together to bring our authors' stories to life.
+            Legal Eye Partners has been dedicated to publishing high-quality text that inspire readers of all ages. We have a team of experienced editors, designers, and marketing professionals who work together to bring our authors' stories to life.
             </h2>
           </div>
         </div>
@@ -30,7 +30,7 @@ const AboutSection = () => {
                   <div className="card-body p-0">
                     <h2 className="card-title h4 mb-3">Our Mission</h2>
                     <p className="card-text lead">
-                    At JuristJournal, our mission is to provide a platform for talented writers to share their intellect with the world. We are committed to helping authors achieve their dreams of becoming published writers.
+                    At Legal Eye Partners, our mission is to provide a platform for talented writers to share their intellect with the world. We are committed to helping authors achieve their dreams of becoming published writers.
                     And show their Online  presence and also contribution
                     </p>
                   </div>

@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
     cb(null, 'images');  // Folder to store images
   },
   filename: (req, file, cb) => {
-    cb(null, `${file.originalname}`);  // Append timestamp to avoid name conflicts
+    cb(null, `${Date.now()}_${file.originalname}`);  // Append timestamp to avoid name conflicts
   }
 });
 

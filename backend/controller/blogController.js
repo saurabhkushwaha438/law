@@ -7,6 +7,13 @@ export const getBlogs = async (req, res) => {
     res.json(blogs);
   } catch (error) {
     console.error('Error fetching blogs:', error);
+    if (error.response) {
+      console.error("Server responded with:", error.response.data);
+    } else if (error.request) {
+      console.error("No response from server:", error.request);
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
     res.status(500).json({ error: 'Error fetching blogs' });
   }
 };
