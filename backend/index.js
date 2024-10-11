@@ -16,7 +16,7 @@ const __dirname = path.dirname(__filename);
 
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
@@ -36,7 +36,7 @@ app.use('/api/blogs', blogRoutes);
 app.use('/api/articles',articleRoutes)
 app.use('/api/contact',contactRoutes);
 
-app.use(express.static(path.join(__dirname,'dist')));
+app.use(express.static(path.join(__dirname,'../frontend/dist')));
 
 
 
@@ -46,7 +46,7 @@ app.use((err, req, res, next) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
 app.listen(port, () => {
