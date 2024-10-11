@@ -49,7 +49,7 @@ const BlogSection = () => {
   
   const handleUploadClick = () => {
     if (isAuthenticated) {
-      navigate('/creatBlogForm');  // Navigate to the CreateBlog page
+      navigate('/createblog');  // Navigate to the CreateBlog page
     } else {
       alert('You must be logged in to upload a blog!');  // Show alert message if not authenticated
     }
