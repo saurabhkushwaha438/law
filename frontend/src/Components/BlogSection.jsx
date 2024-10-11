@@ -91,7 +91,7 @@ const BlogSection = () => {
               <div className="card h-100 d-flex flex-column" style={{ width: '100%' }}>
                 <img
                   style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-                  src={`http://localhost:3000/images/${blog.images}`}
+                  src={`https://legaleyepartners.onrender.com/images/${blog.images}`}
                   className="card-img-top"
                   alt={blog.title}
                 />

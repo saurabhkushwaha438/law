@@ -41,7 +41,7 @@ function Articles() {
                 <small className="text-muted">Published on {new Date(article.createdAt).toLocaleDateString()}</small>
               </div>
               <a 
-                href={` http://localhost:3000/pdfs/${article.pdfUrl}`} 
+                href={` https://legaleyepartners.onrender.com/pdfs/${article.pdfUrl}`} 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
