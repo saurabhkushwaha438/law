@@ -31,7 +31,7 @@ const AboutSection = () => {
                     <h2 className="card-title h4 mb-3">Our Mission</h2>
                     <p className="card-text lead">
                     At Legal Eye Partners, our mission is to provide a platform for talented writers to share their intellect with the world. We are committed to helping authors achieve their dreams of becoming published writers.
-                    And show their Online  presence and also contribution
+                    And show their Online  presence and also thier contribution.
                     </p>
                   </div>
                 </div>
