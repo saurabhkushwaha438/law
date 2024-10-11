@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cors({
-   origin: 'http://localhost:5173/',
+   origin: 'https://legaleyepartner.onrender.com',
 }));
 connectDB();
 
