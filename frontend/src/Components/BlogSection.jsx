@@ -132,7 +132,7 @@ const BlogSection = () => {
               </div>
               <div className="modal-body d-flex flex-column align-items-center">
                 <img
-                  src={`http://localhost:3000/images/${selectedBlog.images}`}
+                  src={`https://legaleyepartners.onrender.com/images/${selectedBlog.images}`}
                   alt={selectedBlog.title}
                   style={{
                     width: '100%',
