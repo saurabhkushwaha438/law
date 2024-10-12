@@ -12,7 +12,7 @@ const BlogSection = () => {
   const navigate = useNavigate();
   
   // Fix: Extract isAuthenticated from useAuth0 hook
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated,user} = useAuth0();
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -49,7 +49,9 @@ const BlogSection = () => {
   
   const handleUploadClick = () => {
     if (isAuthenticated) {
-      navigate('/createblog');  // Navigate to the CreateBlog page
+      if(user.email==='legal.eye.serv@gmail.com'){
+        navigate('/createblog');
+      }else { alert('only admin can upload !');}
     } else {
       alert('You must be logged in to upload a blog!');  // Show alert message if not authenticated
     }
