@@ -17,7 +17,7 @@ const CreateBlogForm = () => {
     formData.append('images', image);  // 'images' matches the multer field name
 
     try {
-      const response = await axios.post('/api/blogs', formData, {
+      const response = await axios.post('https://legaleyepartners.onrender.com/api/blogs', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
