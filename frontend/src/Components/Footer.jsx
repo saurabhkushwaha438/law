@@ -19,7 +19,7 @@ const Footer = () => {
                         className="link-dark"
                         href="tel:+15057922430"
                       >
-                        8871792993
+                        +91 87913 81469
                       </a>
                     </p>
                     <p>
