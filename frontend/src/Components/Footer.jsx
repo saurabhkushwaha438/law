@@ -83,14 +83,14 @@ const Footer = () => {
 
                   <div className="col-lg-4">
                     <div className="credits">
-                      Built by{' '}
+                      follow us on{' '}
                       <a
-                        href="https://www.linkedin.com/in/saurabhkushwaha438/"
+                        href="https://www.linkedin.com/company/legaleye-partners/"
                         className="link-secondary text-decoration-none"
                       >
-                        Saurabh
+                        Linkedin
                       </a>{' '}
-                      with <span className="text-primary">&#9829;</span>
+                       <span className="text-primary">&#9829;</span>
                     </div>
                   </div>
                 </div>
