@@ -17,7 +17,7 @@ const BlogSection = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await axios.get('/api/blogs');
+        const response = await axios.get('https://legaleyepartners.onrender.com/api/blogs');
         
         setBlogs(response.data);
       } catch (error) {
