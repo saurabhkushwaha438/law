@@ -8,6 +8,12 @@ const CreateBlogForm = () => {
   const [image, setImage] = useState(null);
   const [message, setMessage] = useState('');
 
+  //for article 
+
+  const [articleTitle, setArticleTitle] = useState('');
+  const [pdf, setPdf] = useState(null);
+  const [articleMessage, setArticleMessage] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -29,6 +35,28 @@ const CreateBlogForm = () => {
       setImage(null);
     } catch (err) {
       setMessage('Error creating blog');
+    }
+  };
+
+  const handleArticleSubmit = async (e) => {
+    e.preventDefault();
+
+    const articleFormData = new FormData();
+    articleFormData.append('title', articleTitle);
+    articleFormData.append('pdf', pdf);  // 'pdf' for the uploaded article file
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/articles', articleFormData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      setArticleMessage('Article uploaded successfully!');
+      // Reset article form fields
+      setArticleTitle('');
+      setPdf(null);
+    } catch (err) {
+      setArticleMessage('Error uploading article');
     }
   };
 
@@ -88,6 +116,50 @@ const CreateBlogForm = () => {
 
             {/* Message */}
             {message && <p className="mt-3 alert alert-success text-center">{message}</p>}
+          </div>
+        </div>
+      </div>
+         {/* Article Upload Section */}
+         <div className="row justify-content-center mt-5">
+        <div className="col-12 col-md-8 col-lg-12">
+          <div className="card shadow-sm p-4">
+            <h3 className="text-center mb-4">Upload a New Article</h3>
+            <form onSubmit={handleArticleSubmit} encType="multipart/form-data">
+              {/* Article Title Input */}
+              <div className="mb-3">
+                <label htmlFor="articleTitle" className="form-label">Article Title</label>
+                <input 
+                  type="text" 
+                  id="articleTitle" 
+                  name="articleTitle" 
+                  className="form-control" 
+                  placeholder="Enter article title" 
+                  value={articleTitle} 
+                  onChange={(e) => setArticleTitle(e.target.value)} 
+                  required 
+                />
+              </div>
+              
+              {/* PDF Upload */}
+              <div className="mb-3">
+                <label htmlFor="pdf" className="form-label">Upload PDF</label>
+                <input 
+                  type="file" 
+                  id="pdf" 
+                  name="pdf" 
+                  className="form-control" 
+                  onChange={(e) => setPdf(e.target.files[0])} 
+                  accept="application/pdf"
+                  required 
+                />
+              </div>
+              
+              {/* Submit Article Button */}
+              <button type="submit" className="btn btn-secondary w-100">Upload Article</button>
+            </form>
+
+            {/* Article Message */}
+            {articleMessage && <p className="mt-3 alert alert-success text-center">{articleMessage}</p>}
           </div>
         </div>
       </div>

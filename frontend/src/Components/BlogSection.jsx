@@ -5,21 +5,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const BlogSection = () => {
-  const [blogs, setBlogs] = useState([]);
+  const [blogs, setBlogs] = useState([]); // Original blogs list
+  const [filteredBlogs, setFilteredBlogs] = useState([]); // Filtered blogs for display
   const [show, setShow] = useState(false);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
   
-  // Fix: Extract isAuthenticated from useAuth0 hook
-  const { isAuthenticated,user} = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get('https://legaleyepartners.onrender.com/api/blogs');
-        
         setBlogs(response.data);
+        setFilteredBlogs(response.data); // Initialize filtered blogs with original blogs
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -37,39 +37,38 @@ const BlogSection = () => {
     setShow(false);
   };
 
-
   const handleSearch = (e) => {
     e.preventDefault();
-    const filteredBlogs = blogs.filter(blog =>
+    const filtered = blogs.filter(blog =>
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       blog.content.toLowerCase().includes(searchQuery.toLowerCase())
     );
-    setBlogs(filteredBlogs);
+    setFilteredBlogs(filtered); // Update filtered blogs state
   };
   
   const handleUploadClick = () => {
     if (isAuthenticated) {
-      if(user.email==='legal.eye.serv@gmail.com'){
+      if (user.email === 'legal.eye.serv@gmail.com') {
         navigate('/createblog');
-      }else { alert('only admin can upload !');}
+      } else {
+        alert('Only admin can upload!');
+      }
     } else {
-      alert('You must be logged in to upload a blog!');  // Show alert message if not authenticated
+      alert('You must be logged in to upload a blog!');
     }
   };
+
   return (
     <>
       <nav className="navbar bg-body-tertiary">
         <div className="container-fluid">
-          {/* Conditionally disable link if user is not authenticated */}
           <Link 
-            to={isAuthenticated ? '/createblog' : '#'}  // Only navigate if authenticated
+            to={isAuthenticated ? '/createblog' : '#'}
             className={`navbar-brand ${!isAuthenticated ? 'disabled-link' : ''}`}
-            onClick={handleUploadClick}  // Handles click logic
+            onClick={handleUploadClick}
             style={{ cursor: isAuthenticated ? 'pointer' : 'not-allowed' }}
           >
-            <span className="p-2 btn btn-secondary">
-              Upload
-            </span>
+            <span className="p-2 btn btn-secondary">Upload</span>
           </Link>
 
           <form className="d-flex" role="search" onSubmit={handleSearch}>
@@ -88,12 +87,12 @@ const BlogSection = () => {
     
       <div className="container">
         <div className="row">
-          {blogs.map(blog => (
+          {filteredBlogs.map(blog => ( // Display filtered blogs
             <div className="col-12 col-md-6 col-lg-4 mb-4" key={blog._id}>
               <div className="card h-100 d-flex flex-column" style={{ width: '100%' }}>
                 <img
                   style={{ width: '100%', height: '200px', objectFit: 'cover' }}
-                  src={`https://legaleyepartners.onrender.com/images/${blog.images}`}
+                  src={`${blog.images}`}
                   className="card-img-top"
                   alt={blog.title}
                 />
@@ -134,7 +133,7 @@ const BlogSection = () => {
               </div>
               <div className="modal-body d-flex flex-column align-items-center">
                 <img
-                  src={`https://legaleyepartners.onrender.com/images/${selectedBlog.images}`}
+                  src={`${selectedBlog.images}`}
                   alt={selectedBlog.title}
                   style={{
                     width: '100%',
