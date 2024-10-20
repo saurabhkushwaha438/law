@@ -46,7 +46,7 @@ const CreateBlogForm = () => {
     articleFormData.append('pdf', pdf);  // 'pdf' for the uploaded article file
 
     try {
-      const response = await axios.post('http://localhost:3000/api/articles', articleFormData, {
+      const response = await axios.post('https://legaleyepartners.onrender.com/api/articles', articleFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
