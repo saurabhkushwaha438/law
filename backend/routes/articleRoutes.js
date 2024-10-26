@@ -1,21 +1,14 @@
 import express from 'express';
 import multer from 'multer';
-import { getArticles, createArticle } from '../controller/articleController.js';
-import cloudinary from '../config/cloudinaryConfig.js';
+import bucket from '../config/firebaseConfig.js';  // Import your Firebase configuration
 import fs from 'fs';
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'pdfs');  
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${file.originalname}`);  
-  }
-});
-
-const upload = multer({ storage });
+import { v4 as uuidv4 } from 'uuid';
+import { getArticles, createArticle } from '../controller/articleController.js';
 
 const router = express.Router();
+const upload = multer({ dest: 'pdfs/' }); // Temporary local storage
+
+
 
 router.get('/', getArticles);
 
@@ -24,33 +17,31 @@ router.post('/', upload.single('pdf'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ message: 'No file uploaded' });
     }
-    
-    console.log('File uploaded:', req.file);
 
-    const result = await cloudinary.uploader.upload(req.file.path, { 
-      resource_type: 'raw',
-      //format: 'pdf',
-     // type: 'authenticated',
-    //  transformation: [{ flags: 'attachment' }]
-    });
-    console.log('Cloudinary upload result:', result);
+    // Generate unique file name
+    const fileName = `${uuidv4()}_${req.file.originalname}`;
+    const fileUpload = bucket.file(fileName);
 
-    fs.unlink(req.file.path, (err) => {
-      if (err) {
-        console.log('Error deleting file:', err);
-        return res.status(500).json({ message: 'Error deleting local file' });
-      } else {
-        console.log('Deleted local file:', req.file.path);
-      }
+    // Read file and upload to Firebase Storage
+    await fileUpload.save(fs.readFileSync(req.file.path), {
+      metadata: {
+        contentType: req.file.mimetype,
+      },
     });
 
-    req.body.pdf = result.secure_url;
+    // Get public URL
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${fileUpload.name}`;
+    req.body.pdf = publicUrl;
+
+    // Delete the local file after upload
+    fs.unlinkSync(req.file.path);
+
+    // Create article with the uploaded file URL
     await createArticle(req, res);
-
   } catch (error) {
-    console.error('Error during article creation:', error);
+    console.error('Error during file upload:', error);
     res.status(500).json({ message: 'Server error' });
   }
-});  
+});
 
 export default router;
