@@ -23,7 +23,7 @@ const CreateBlogForm = () => {
     formData.append('images', image);  // 'images' matches the multer field name
 
     try {
-      const response = await axios.post('https://legaleyepartners.onrender.com/api/blogs', formData, {
+      const response = await axios.post('https://legaleyepartners.in/api/blogs', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -46,7 +46,7 @@ const CreateBlogForm = () => {
     articleFormData.append('pdf', pdf);  // 'pdf' for the uploaded article file
 
     try {
-      const response = await axios.post('https://legaleyepartners.onrender.com/api/articles', articleFormData, {
+      const response = await axios.post('https://legaleyepartners.in/api/articles', articleFormData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
