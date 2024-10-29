@@ -9,7 +9,7 @@ function Articles() {
   useEffect(() => {
     const fetchArticles = async () => {
       try {
-        const response = await axios.get('https://legaleyepartners.onrender.com/api/articles', {
+        const response = await axios.get('https://legaleyepartners.in/api/articles', {
           referrerPolicy: 'no-referrer',
           mode: 'no-cors',
         });
