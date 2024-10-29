@@ -19,7 +19,7 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://legaleyepartners.onrender.com/api/contact', formData);
+      const response = await axios.post('https://legaleyepartners.in/api/contact', formData);
       alert('Email sent successfully');
     } catch (error) {
       console.error('There was an error sending the email!', error);
